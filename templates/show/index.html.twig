@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+{% endblock %}
+
+
+{% block body %}
+	<div class="container">
+<h1 class="title p-1">{{article.title}}</h1>
+
+		<div class="img-fluid">
+<img width="100%" src="https://www.superprof.fr/blog/wp-content/uploads/2017/10/objectif-photo-artistique-973x644.jpg.webp" alt="{{article.title}}"/>
+
+		</div>
+		<div class="content text-justify">
+			<p class="date">Ecrit le
+				{{article.createdAt | date("d/m/Y") }}
+				à
+				{{article.createdAt | date("H:i")}}
+			</p>
+<h5 class="title">{{article.title}}</h5>
+
+			<p class="content">{{article.content}}</p>
+		</div>
+	</div>
+
+{% endblock %}
+
+
