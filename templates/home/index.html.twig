@@ -2,10 +2,6 @@
 
 {% block title %}Accueil
 {% endblock %}
-{% block stylesheets %}
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
-{% endblock %}
-
 
 {% block body %}
 
@@ -19,8 +15,13 @@
 					<p class="date">Ecrit le
 						{{article.createdAt | date("d/m/Y")}}
 						à
-						{{article.createdAt | date("H:i")}}</p>
-					<img src="https://www.webmarketing-com.com/wp-content/uploads/2017/11/ridigio-ads-livre-blanc-600x314.png" width="100%" class="card-img-top" alt="{{article.image}}">
+						{{article.createdAt | date("H:i")}}
+						par
+						<span class="author">
+							{{article.author}}</span>
+					</p>
+
+					<img src="/assets/blog/images/{{article.image}}" width="100%" class="card-img-top" alt="{{article.image}}">
 
 
 					<div class="card-body">

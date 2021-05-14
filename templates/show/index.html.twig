@@ -1,29 +1,26 @@
 {% extends 'base.html.twig' %}
-{% block stylesheets %}
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+{% block title %}
+	{{article.title}}
 {% endblock %}
-
 
 {% block body %}
 	<div class="container">
-<h1 class="title p-1">{{article.title}}</h1>
-
+		<h1 class="title p-1">{{article.title}}</h1>
 		<div class="img-fluid">
-<img width="100%" src="https://www.superprof.fr/blog/wp-content/uploads/2017/10/objectif-photo-artistique-973x644.jpg.webp" alt="{{article.title}}"/>
-
+			<img width="100%" src="/assets/blog/images/{{article.image}}" alt="{{article.title}}"/>
 		</div>
 		<div class="content text-justify">
-			<p class="date">Ecrit le
-				{{article.createdAt | date("d/m/Y") }}
+			<p class="date">Ecrit le {{article.createdAt | date("d/m/Y") }}
+				
 				à
 				{{article.createdAt | date("H:i")}}
+				par
+				<span class="author">
+					{{article.author}}</span>
 			</p>
-<h5 class="title">{{article.title}}</h5>
-
-			<p class="content">{{article.content}}</p>
+			<h5 class="title">{{article.title}}</h5>
+			<p class="content">{{article.content | raw}}</p>
 		</div>
 	</div>
 
 {% endblock %}
-
-
