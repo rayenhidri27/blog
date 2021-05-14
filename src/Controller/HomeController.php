@@ -10,24 +10,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+    private $repoArticle;
+
+    public function __construct(ArticleRepository $repoArticle)
+    {
+        $this->repoArticle = $repoArticle;
+    }
+
     /**
      * @Route("/", name="home")
      */
-    public function index(ArticleRepository $repoArticle): Response
+    public function index(): Response
     {
-        $articles= $repoArticle->findAll();
-        return $this->render('home/index.html.twig',[
-            "articles"=>$articles
+        $articles = $this->repoArticle->findAll();
+        return $this->render('home/index.html.twig', [
+            "articles" => $articles
         ]);
     }
 
     /**
      * @Route("/show/{id}", name="show")
      */
-    public function show(ArticleRepository $repoArticle, $id): Response
+    public function show(Article $article): Response
     {
-        $article = $repoArticle->find($id);
-        if(!$article){
+        if (!$article) {
             $this->redirectToRoute("home");
         }
         return $this->render('show/index.html.twig', [
