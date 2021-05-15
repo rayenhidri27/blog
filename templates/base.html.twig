@@ -6,8 +6,7 @@
 			{% block title %}Welcome!
 			{% endblock %}
 		</title>
-		<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/> 
-		{% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/> {% block stylesheets %}{% endblock %}
 		</head>
 		<body>
 			<nav class="navbar navbar-default">
@@ -35,8 +34,9 @@
 					</div>
 				</div>
 			</nav>
+			<div class="container-fluid"> {% block body %}{% endblock %}
+				</div>
 
-			{% block body %}{% endblock %}
-			{% block javascripts %}{% endblock %}
-		</body>
-	</html>
+				{% block javascripts %}{% endblock %}
+			</body>
+		</html>
