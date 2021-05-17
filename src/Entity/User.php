@@ -9,9 +9,14 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Cet email existe deja."
+ * )
  */
 class User implements UserInterface
 {
@@ -40,7 +45,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath = "password", message="les deux mots de passes ne sont pas identi")
+     * @Assert\EqualTo(propertyPath = "password", message="les deux mots de passes ne sont pas identiques")
      */
     private $passwordConfirm;
 
