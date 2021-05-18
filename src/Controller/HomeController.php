@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,13 +53,29 @@ class HomeController extends AbstractController
      */
     public function showArticles(?Category $category): Response
     {
-        if($category)
-        {
+        if ($category) {
             $articles = $category->getArticles()->getValues();
-        }
-        else {
+        } else {
             return $this->redirectToRoute("home");
         }
+        return $this->render('home/index.html.twig', [
+            "articles" => $articles,
+            "categories" => $this->repoCategory->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/recherche", name="recherche")
+     */
+    public function recherche(Request $request): Response
+    {
+        $categories = $this->repoCategory->findAll();
+        $date = \DateTime::createFromFormat("Y-m-d", date($request->request->get('date')));
+        //dd($date);
+        $articles = $this->repoArticle->findByTitleLike($request->request->get('title'), $date);
+
+        
+
         return $this->render('home/index.html.twig', [
             "articles" => $articles,
             "categories" => $this->repoCategory->findAll()
