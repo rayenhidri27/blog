@@ -21,11 +21,15 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="security_register")
+     * @Route("/register/{user_type}", name="security_register")
      */
-    public function resgister(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function resgister(Request $request, UserPasswordEncoderInterface $encoder, $user_type): Response
     {
         $user = new User();
+        
+        if($user_type === "admin" && $this->isGranted('ROLE_SUPER_ADMIN')){
+            $user->setRoles(['ROLE_ADMIN']);
+        }
         $form = $this->createForm(RegisterType::class, $user);
 
         $form->handleRequest($request);

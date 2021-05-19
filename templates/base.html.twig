@@ -46,7 +46,7 @@
 								</li>
 							{% else %}
 								<li>
-									<a href="{{ path('security_register')}}" class="btn btn-success mr-3">Inscription</a>
+									<a href="{{ path('security_register', {user_type : 'user'})}}" class="btn btn-success mr-3">Inscription</a>
 								</li>
 								<li>
 									<a href="{{ path('security_login')}}" class="btn btn-info">Connexion</a>
